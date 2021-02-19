@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ department.name }}{% endblock %}
+
+{% block body %}
+    <h1>Harmonogram {{ department.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ department.id }}</td>
+            </tr>
+            <tr>
+                <th>Nazwa</th>
+                <td>{{ department.name }}</td>
+            </tr>
+            <tr>
+                <th>Aktywny</th>
+                <td>{{ department.active ? 'Tak' : 'Nie' }}</td>
+            </tr>
+            <tr>
+                <th>Poniedziałek</th>
+                <td>{{ department.monday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Wtorek</th>
+                <td>{{ department.tuesday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Środa</th>
+                <td>{{ department.wednesday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Czwartek</th>
+                <td>{{ department.thursday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Piątek</th>
+                <td>{{ department.friday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Sobota</th>
+                <td>{{ department.saturday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Niedziela</th>
+                <td>{{ department.sunday ? 'Otwarte' : 'Zamknięte' }}</td>
+            </tr>
+            <tr>
+                <th>Godziny otwarcia</th>
+                <td>{{ department.workHours }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+        <a  class="btn btn-primary" href="{{ path('department_edit', {'id': department.id}) }}">Edytuj</a>
+
+        {{ include('department/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

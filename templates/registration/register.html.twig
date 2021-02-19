@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Rejestracja</h1>
+
+    {{ form_start(registrationForm) }}
+
+        {{ form_row(registrationForm.name, {
+            label: 'Imię',
+            attr: {'class': 'form-control'}
+            })
+        }}
+
+        {{ form_row(registrationForm.lastname, {
+            label: 'Nazwisko',
+            attr: {'class': 'form-control'}
+            })
+        }}
+
+        {{ form_row(registrationForm.email, {
+            label: 'Adres email',
+            attr: {'class': 'form-control'}
+            })
+        }}
+
+        {{ form_row(registrationForm.plainPassword.first, {
+            attr: {
+                'pattern' : '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$',
+                'title' : 'Hasło powinno być o długości od 8 do 12 znaków oraz powinno zawierać małą i dużą literę, liczbę i znak specjalny(!@#$%^&*_=+-)'
+            }
+        }) }}
+        {{ form_row(registrationForm.plainPassword.second) }}
+
+
+        {{ form_row(registrationForm.birthDate, {
+            label: 'Data urodzenia 123',
+            attr: {'class': 'form-control', 'max' : "now"|date("Y-m-d")}
+            })
+        }}
+
+        {{ form_row(registrationForm.residencePlace, {
+            label: 'Miejsce zamieszkania',
+            attr: {'class': 'form-control'}
+            })
+        }}
+
+        {{ form_row(registrationForm.phone, {
+            label: 'Numer telefonu',
+            attr: {'class': 'form-control'}
+            })
+        }}
+
+        <br />
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <button type="submit" class="btn btn-primary">Dodaj nowego użytkownika</button>
+    {% else %}
+        <button type="submit" class="btn btn-primary">Zarejestruj mnie</button>
+    {% endif %}
+
+    {{ form_end(registrationForm) }}
+
+{% endblock %}

@@ -1,0 +1,72 @@
+<nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% if app.request.pathinfo == path('homepage') %} active {% endif %}">
+            <a class="nav-link" href="{{ path('homepage') }}">Strona Główna</a>
+        </li>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+
+            <li class="nav-item {% if app.request.pathinfo == path('app_register') %} active {% endif %}">
+                <a class="nav-link" href="{{ path('app_register') }}">Rejestracja</a>
+            </li>
+
+            <li class="nav-item {% if app.request.pathinfo == path('app_login') %} active {% endif %}">
+                <a class="nav-link" href="{{ path('app_login') }}">Logowanie</a>
+            </li>
+
+        {% else %}
+
+        <li class="nav-item {% if app.request.pathinfo == path('admin_user_edit', { id: app.user.id}) %} active {% endif %}">
+            <a class="nav-link" href="{{ path('admin_user_edit', { id: app.user.id}) }}">Edytuj konto</a>
+        </li>
+
+            <li class="nav-item {% if app.request.pathinfo == path('admin_change_pass', { id: app.user.id}) %} active {% endif %}">
+                <a class="nav-link" href="{{ path('admin_change_pass', { id: app.user.id}) }}">Zmień hasło</a>
+            </li>
+
+            {% if is_granted('ROLE_DOCTOR') %}
+                <li class="nav-item {% if app.request.pathinfo == path('visit_doctor_patients') %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('visit_doctor_patients') }}">Lista wizyt</a>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+
+                <li class="nav-item {% if app.request.pathinfo == path('admin_users') %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('admin_users') }}">Lista użytkowników</a>
+                </li>
+
+                <li class="nav-item {% if app.request.pathinfo == path('admin_user_add') %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('admin_user_add') }}">Dodaj użytkownika</a>
+                </li>
+
+                <li class="nav-item {% if app.request.pathinfo == path('department_index') %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('department_index') }}">Harmonogram</a>
+                </li>
+
+                <li class="nav-item {% if app.request.pathinfo == path('department_new') %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('department_new') }}">Dodaj harmonogram</a>
+                </li>
+            {% endif %}
+
+
+
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item {% if app.request.pathinfo == path('user_images',  { id: app.user.id }) %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('user_images', { id: app.user.id }) }}">Zdjęcia RTG</a>
+                </li>
+
+                <li class="nav-item {% if app.request.pathinfo == path('visit_patient_list', {id: app.user.id}) %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('visit_patient_list', {id: app.user.id}) }}">Lista wizyt</a>
+                </li>
+
+                <li class="nav-item {% if app.request.pathinfo == path('visit_doctor_list') %} active {% endif %}">
+                    <a class="nav-link" href="{{ path('visit_doctor_list') }}">Rezerwacja wizyty</a>
+                </li>
+
+            {% endif %}
+
+        {% endif %}
+
+    </ul>
+</nav>

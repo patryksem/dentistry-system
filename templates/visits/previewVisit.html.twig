@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wizyta{% endblock %}
+
+{% block body %}
+<h3>Wizyta pacjenta: {{ visit.patientId.fullName }}</h3>
+<br />
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Email</th>
+            <th scope="col">Data urodzenia</th>
+            <th scope="col">Telefon</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ visit.patientId.name }}</td>
+                <td>{{ visit.patientId.lastname }}</td>
+                <td>{{ visit.patientId.email }}</td>
+                <td>{{ visit.patientId.birthDate|date('Y-m-d') }}</td>
+                <td>{{ visit.patientId.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+    <form method="post" action="{{ path('doctor_accept_visit_finish', {id:visit.id }) }}">
+    <p><b>Opis wizyty przez pacjenta: </b> {{ visit.description }}</p>
+
+    <div class="form-group row hide">
+        <label class="col-2 col-form-label">Opisz wizytę pacjenta</label>
+        <div class="col-10">
+            <textarea name="comment" class="form-control"></textarea>
+
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit" >
+        Zakończ wizytę
+    </button>
+    </form>
+
+    <hr />
+
+    <div class="card mb-3">
+        <div class="card-header" id="headingOne">
+
+                <button class="btn btn-info" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                    Pokaż historię pacjenta
+                </button>
+
+                <button class="btn btn-info" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                    Pokaż zdjęcia RTG
+                </button>
+        </div>
+
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Opis pacjenta</th>
+                        <th scope="col">Opis stomatologa </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for visit in visit.patientId.visits %}
+                        {% if visit.status == 1 %}
+                        <tr>
+                            <td>{{  visit.visitDate|date("Y-m-d H:i") }}</td>
+                            <td>{{ visit.description }}</td>
+                            <td>{{ visit.comment }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+            <div class="card-body">
+                <div class="text-center rtg-images-list">
+
+                    {% for rtgFile in files %}
+                        <div class="card-body small-image">
+                            <a href="{{ vich_uploader_asset(rtgFile) }}" target="_blank">
+                                <img src="{{ vich_uploader_asset(rtgFile) }}" class="rtg-image rtg-small rounded img-thumbnail">
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

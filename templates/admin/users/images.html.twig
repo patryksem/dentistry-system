@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RTG{% endblock %}
+
+{% block body %}
+
+    <h1>Zdjęcia RTG</h1>
+    <hr />
+
+
+    {{ form_start(form) }}
+
+
+        {{ form_widget(form.imageFile) }}
+
+    <br />
+    <button class="btn btn-success" type="submit">Dodaj zdjęcie</button>
+
+    {{ form_end(form) }}
+
+
+    <hr />
+
+    <div class="text-center rtg-images-list">
+
+        {% for rtgFile in files %}
+            <div class="card-body">
+            <a href="{{ vich_uploader_asset(rtgFile) }}" target="_blank">
+                <img src="{{ vich_uploader_asset(rtgFile) }}" class="rtg-image rounded img-thumbnail">
+                <a href="{{ path('user_images_remopve', {id: rtgFile.id}) }}" class="btn btn-block btn-danger"> USUŃ </a>
+                <a href="{{ vich_uploader_asset(rtgFile) }}" class="btn btn btn-block btn-success" download> POBIERZ </a>
+            </a>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

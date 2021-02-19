@@ -1,0 +1,58 @@
+{{ form_start(form) }}
+
+<div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Nazwa</label>
+    <div class="col-sm-6">
+        {{ form_widget(form.name,  {'attr': {'placeholder': 'Nazwa harmonogramu'}}) }}
+
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Godziny otawrcia</label>
+    <div class="col-sm-6">
+        {{ form_widget(form.workHours,  {'attr': {
+            'placeholder': '08-16',
+            'pattern': '^[0-9]{2}\-[0-9]{2}',
+            'title': 'Przykładowa poprawna wartość to 03-10 albo 11-23'
+        }}) }}
+        {{ form_errors(form.workHours) }}
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Aktywny</label>
+    <div class="col-sm-6">
+        {{ form_widget(form.active,  {'label': false}) }}
+        {{ form_errors(form.workHours) }}
+    </div>
+</div>
+
+<fieldset class="form-group">
+    <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Dni pracujące</legend>
+        <div class="col-sm-3">
+
+            {{ form_widget(form.monday, {'label': 'Poniedziałek' }) }}
+
+            {{ form_widget(form.wednesday, {'label': 'Środa' }) }}
+
+            {{ form_widget(form.friday, {'label': 'Piątek' }) }}
+
+            {{ form_widget(form.sunday, {'label': 'Niedziela' }) }}
+
+        </div>
+        <div class="col-sm-3">
+
+            {{ form_widget(form.tuesday, {'label': 'Wtorek' }) }}
+
+            {{ form_widget(form.thursday, {'label': 'Czwartek' }) }}
+
+            {{ form_widget(form.saturday, {'label': 'Sobota' }) }}
+
+        </div>
+    </div>
+</fieldset>
+
+    <button class="btn btn-success">Zapisz</button>
+{{ form_end(form) }}

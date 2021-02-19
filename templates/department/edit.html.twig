@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edycja harmonogramu{% endblock %}
+
+{% block body %}
+    <h1>Edytuj harmonogram</h1> <br />
+
+
+    {{ include('department/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('department/_delete_form.html.twig') }}
+{% endblock %}

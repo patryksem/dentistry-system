@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stomatolog {{ doctor.fullName }}{% endblock %}
+
+{% block body %}
+    <h3>Rezerwcja u stomatologa: {{ doctor.fullName }}</h3>
+
+    <div class="form-group row">
+        <label for="bookVisitDate" class="col-2 col-form-label">Wybierz datę</label>
+        <div class="col-6">
+            <input  data-provide="datepicker" class="form-control datepicker" type="text" id="bookVisitDate" disabled="disabled" placeholder="Wybierz datę">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="bookVisitHour" class="col-2 col-form-label">Wybierz godzinę</label>
+        <div class="col-6">
+            <select class="form-control" id="bookVisitHour" disabled>
+                <option>Wybierz godzinę</option>
+            </select>
+        </div>
+    </div>
+
+    {{ form_start(form, {'attr' : {"id" : "bookVisitForm"}}) }}
+
+    {{ form_widget(form.visitDate) }}
+
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Informacje dodatkowe</label>
+        <div class="col-6">
+            {{ form_widget(form.description) }}
+
+        </div>
+    </div>
+
+    <br />
+    <button id="btn-book-visit" class="btn btn-success" disabled>Zapisz na wizytę</button>
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/datepicker/bootstrap-datepicker3.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/datepicker/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/datepicker/bootstrap-datepicker.pl.min.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+.main-content {
+    padding-top: 15px;
+}
+
+#visit_form_visitDate {
+    display: none;
+}
+
+nav.sidebar {
+    height: 100vh;
+}
+
+div.custom-file {
+    width: auto;
+}
+
+div.custom-file > input {
+    opacity: 1;
+}
+
+div.custom-file > label {
+    opacity: 0;
+}
+
+.rtg-image {
+    max-width: 300px;
+    max-height: 200px;
+}
+
+.rtg-small {
+    max-width: 150px;
+    max-height: 100px;
+}
+
+.custom-file > a {
+    display: none;
+}
+
+.rtg-images-list .card-body {
+    display: inline-block;
+}
+
+.rtg-images-list .card-body > a:last-child {
+    display: block;
+}

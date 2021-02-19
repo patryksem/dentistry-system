@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista użytkowników {% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-responsive">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Email</th>
+            <th scope="col">Data urodzenia</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Miejsce zamieszkania</th>
+            <th scope="col">Uprawnienia</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ user.name }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.birthDate|date('Y-m-d') }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.residencePlace }}</td>
+            <td>{{ user.roleName }}</td>
+            <td>
+                <a href="{{ path('admin_user_edit', { id: user.id}) }}"><button class="btn btn-sm btn-primary">Edytuj</button></a>
+                <a href="{{ path('user_images', { id: user.id}) }}"><button class="btn btn-sm btn-info">RTG</button></a>
+                <a href="{{ path('visit_patient_list', { id: user.id}) }}"><button class="btn btn-sm btn-warning">Wizyty</button></a>
+
+
+            </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

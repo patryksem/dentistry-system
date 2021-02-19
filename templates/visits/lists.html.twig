@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wizyty{% endblock %}
+
+{% block body %}
+    <h3>Historia Twoich wizyt</h3>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Stomatolog</th>
+            <th scope="col">Data</th>
+            <th scope="col">Opis medyczny</th>
+            {% if is_granted('ROLE_ADMIN') and openVisitsExists %}
+                <th scope="col">#</th>
+            {% endif %}
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for visit in openVisits %}
+            {% set posNumber = posNumber + 1 %}
+            <tr  class="{% if visit.status == 0 %} btn-success {% else %} btn-info {% endif %}">
+                <td>{{ posNumber}}</td>
+                <td>{{  visit.doctorId.fullname }}</td>
+                <td>{{  visit.visitDate|date("Y-m-d H:i") }}</td>
+                <td>{{ visit.comment }}</td>
+                {% if is_granted('ROLE_ADMIN')%}
+                    <td>
+                        <a href="{{ path('visit_remove', {id: visit.id}) }}" class="btn btn-danger"> USUŃ </a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        {% for visit in closedVisits %}
+            {% set posNumber = posNumber + 1 %}
+            <tr  class="{% if visit.status == 0 %} btn-success {% else %} btn-info {% endif %}">
+                <td>{{ posNumber }}</td>
+                <td>{{  visit.doctorId.fullname }}</td>
+                <td>{{  visit.visitDate|date("Y-m-d H:i") }}</td>
+                <td>{{ visit.comment }}</td>
+                {% if is_granted('ROLE_ADMIN') and openVisitsExists %}
+                    <td></td>
+                {%  endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

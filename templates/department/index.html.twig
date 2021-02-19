@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Harmonogram{% endblock %}
+
+{% block body %}
+    <h1>Lista harmonogramów</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Aktywny</th>
+                <th>Pon.</th>
+                <th>Wt.</th>
+                <th>Sr.</th>
+                <th>Czw.</th>
+                <th>Pt.</th>
+                <th>Sob.</th>
+                <th>Niedz.</th>
+                <th>Godziny <br />otwarcia</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for department in departments %}
+            <tr  {% if department.active %} class="btn-success" {% endif %}>
+                <td>{{ department.id }}</td>
+                <td>{{ department.name }}</td>
+                <td>{{ department.active ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.monday ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.tuesday ? 'Tak' : 'Nie'}}</td>
+                <td>{{ department.wednesday ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.thursday ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.friday ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.saturday ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.sunday ? 'Tak' : 'Nie' }}</td>
+                <td>{{ department.workHours }}</td>
+                <td>
+                    <a class="btn btn-primary " href="{{ path('department_show', {'id': department.id}) }}">Pokaż</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

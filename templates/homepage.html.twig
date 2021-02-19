@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona główa{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+        <p>Witamy <b>{{ app.user.getFullName() }}</b>!</p>
+        <p>Skorzystaj z menu znajdującego się po lewej stronie :)</p>
+
+        {% if isOpen %}
+            <p>Dziś jest {{ "now"|date('d-m-Y') }} i jesteśmy otwarci w godzinach {{ workingHours }}</p>
+        {% else %}
+            <p>Dziś jest {{ "now"|date('d-m-Y') }} i klinika jest nieczynna</p>
+        {% endif %}
+
+    {% else %}
+
+    <h3>Witamy na stronie gabinetu stomatologicznego</h3>
+    <p>Zaloguj się lub utwórz konto aby móc zapisać się na wizytę</p>
+
+    {%  endif %}
+{% endblock %}

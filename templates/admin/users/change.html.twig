@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zmiana hasła{% endblock %}
+
+{% block body %}
+
+    <h1>Zmiana hasła</h1>
+    <hr />
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.currentPassword) }}
+
+    {{ form_row(form.plainPassword.first, {
+        label: 'Nowe hasło',
+        attr: {
+            'pattern' : '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$',
+            'title' : 'Hasło powinno być o długości od 8 do 12 znaków oraz powinno zawierać małą i dużą literę, liczbę i znak specjalny(!@#$%^&*_=+-)'
+        }
+    }) }}
+    {{ form_row(form.plainPassword.second, {
+        label: 'Powtórz nowe hasło'
+    }) }}
+
+    <br />
+        <button type="submit" class="btn btn-primary">Zmień hasło</button>
+
+    {{ form_end(form, {'render_rest': false}) }}
+    <br />
+
+
+{% endblock %}

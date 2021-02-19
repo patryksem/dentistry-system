@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodawanie użytkownika{% endblock %}
+
+{% block body %}
+
+    <h1>Dodaj nowego użytkownika</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.name, {
+        label: 'Imię',
+        attr: {'class': 'form-control'}
+    })
+    }}
+
+    {{ form_row(form.lastname, {
+        label: 'Nazwisko',
+        attr: {'class': 'form-control'}
+    })
+    }}
+
+    {{ form_row(form.email, {
+        label: 'Adres email',
+        attr: {'class': 'form-control'}
+    })
+    }}
+
+    {{ form_row(form.roles, {
+        label: 'Rola użytkownika',
+        attr: {'class': 'form-control'}
+    })
+    }}
+
+
+    {{ form_row(form.birthDate, {
+        label: 'Data urodzenia',
+        attr: {'class': 'form-control', 'max' : "now"|date("Y-m-d")}
+    })
+    }}
+
+    {{ form_row(form.residencePlace, {
+        label: 'Miejsce zamieszkania',
+        attr: {'class': 'form-control'}
+    })
+    }}
+
+    {{ form_row(form.phone, {
+        label: 'Numer telefonu',
+        attr: {'class': 'form-control'}
+    })
+    }}
+
+    <br />
+    <button type="submit" class="btn btn-primary">Dodaj nowego użytkownika</button>
+
+    {{ form_end(form) }}
+
+{% endblock %}
